@@ -48,65 +48,48 @@ function img_return() {
 }
 
 $(document).ready(function() {
+  var _localUrl = window.location.href.split('#')[0];
+  if (_localUrl.indexOf('&') > -1) {
+    window.location.href = 'http://neo1128.toma.ltd/'
+    return
+  }
   var isdesktop = device.default.desktop()
   if (isdesktop) {
-    $('.img-tips').css('display', 'none')
+    $('.desktop_control').css('display', 'block')
   } else {
-    $('.desktop_control').css('display', 'none')
+    $('.img-tips').css('display', 'block')
   }
   handleWechatShare()
 });
 
+
 function handleWechatShare() {
-  var url = window.location.href.split('#')[0]
-  var apiurl = 'http://neo1128.toma.ltd/getsignpackage.php?url=' + url
-  $.get(apiurl, function(res) {
+  var url = window.location.href.split('#')[0]; //'http://neo1128.toma.ltd/' //window.location.href.split('#')[0];
+  var ajaxurl = 'http://neo1128.toma.ltd/getsignpackage.php?url=' + url
+  $.get(ajaxurl, function(res) {
     wx.config({
       debug: false,
       appId: res.appId,
       timestamp: res.timestamp,
       nonceStr: res.nonceStr,
       signature: res.signature,
-      jsApiList: ['checkJsApi', 'onMenuShareTimeline', 'onMenuShareAppMessage']
-    })
+      jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ']
+    });
     wx.ready(function() {
-      const imgUrl = './imgmini.jpg'
-      const _localInfo = that.localInfo.substring(1, that.localInfo.length);
-      var link = url
-      wx.onMenuShareTimeline({
+      var share_config = {
+        imgUrl: 'http://neo1128.toma.ltd/imgmini.jpg', //分享图，默认当相对路径处理，所以使用绝对路径的的话，“http://”协议前缀必须在。
         desc: '别怪我没提醒你，内藏惊“玺”', //摘要,如果分享到朋友圈的话，不显示摘要。
         title: '没想到，他们是千玺的1128分之一', //分享卡片标题
-        link: link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-        imgUrl: imgUrl, // 自定义图标
-        trigger: function(res) {
-          // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回.
-          //alert('click shared');
-        },
-        success: function(res) {
-          //alert('shared success');
-          //some thing you should do
-        },
-        cancel: function(res) {
-          //alert('shared cancle');
-        },
-        fail: function(res) {
-          //alert(JSON.stringify(res));
-        }
-      });
-      wx.onMenuShareAppMessage({
-        desc: '别怪我没提醒你，内藏惊“玺”', //摘要,如果分享到朋友圈的话，不显示摘要。
-        title: '没想到，他们是千玺的1128分之一', //分享卡片标题
-        link: link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-        imgUrl: imgUrl, // 自定义图标
-        type: 'link', // 分享类型,music、video或link，不填默认为link
-        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-        success: function() {
-          // 用户确认分享后执行的回调函数
+        link: url,
+        success: function() { //分享成功后的回调函数
         },
         cancel: function() {
           // 用户取消分享后执行的回调函数
         }
-      })
+      }
+      wx.onMenuShareAppMessage(share_config);
+      wx.onMenuShareTimeline(share_config);
+      wx.onMenuShareQQ(share_config);
     })
   });
 }
