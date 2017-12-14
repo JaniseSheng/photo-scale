@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=50.0">
+	<title>adidas neo X 易烊千玺 海报</title>
+	<script src="./jquery.min.js"></script>
+	<script src="./device.js"></script>
+	<script>
+		var _hmt = _hmt || [];
+		(function() {
+			var hm = document.createElement("script");
+			hm.src = "https://hm.baidu.com/hm.js?91f25ecbe6bbac34093feddc8ee0da13";
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+</head>
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+	}
+
+	html,
+	body {
+		height: 100%;
+		position: relative;
+		overflow: hidden;
+	}
+
+	#scaleimg {
+		max-height: 100%;
+		max-width: 100%;
+		position: relative;
+		transition: all 1s ease;
+		vertical-align: middle;
+	}
+
+	.button {
+		width: 36px;
+		height: 36px;
+		cursor: pointer;
+		display: inline-block;
+		border-radius: 3px;
+		font-size: 16px;
+		text-decoration: none;
+		-o-transition-property: all;
+		transition-property: all;
+		-webkit-transition-duration: .5s;
+		-moz-transition-duration: .5s;
+		-o-transition-duration: .5s;
+		-ms-transition-duration: .5s;
+		transition-duration: .5s;
+		background-color: #1894f2;
+	}
+
+	.button svg {
+		fill: white;
+	}
+
+	.button.sacle1 {
+		background-color: transparent !important;
+	}
+
+	.button.sacle1:hover svg {
+		fill: #1894f2;
+	}
+
+	.button.sacle0 {
+		background-color: transparent !important;
+	}
+
+	.button.sacle0:hover svg {
+		fill: #1894f2;
+	}
+
+	.button.return {
+		background-color: white;
+	}
+
+	.button.return svg {
+		background-color: white;
+		border-radius: 50%;
+	}
+
+	.button.return:hover {
+		background-color: #75c3fe;
+	}
+
+	.button.up svg {
+		transform: rotate(180deg);
+	}
+
+	.button.left svg {
+		transform: rotate(90deg);
+	}
+
+	.button.right svg {
+		transform: rotate(-90deg);
+	}
+
+	.button:hover {
+		background-color: rgb(73, 115, 242);
+	}
+
+	.desktop_control {
+		position: fixed;
+		right: 12px;
+		bottom: 12px;
+	}
+
+	.img-tips {
+		width: 50px;
+		position: fixed;
+		right: 10px;
+		bottom: 10px;
+	}
+</style>
+
+<body style="background-color: black; text-align:center;overflow-x: scroll;">
+	<span style="line-height: 100vh">
+		<img id='scaleimg' src="./img.jpg" alt="" style="left: 0%; top: 0%;transform: scale(1)">
+	</span>
+	<img class='img-tips' src="./tips.gif" alt="">
+	<div class='desktop_control'>
+		<div class='button return' info='复位' onclick='img_return()'>
+			<svg t="1513157640705" style="vertical-align: middle;" viewBox="0 0 1024 1024" p-id="2373"><path d="M512 9.216C234.496 9.216 9.216 234.496 9.216 512c0 277.504 225.28 502.784 502.784 502.784 277.504 0 502.784-225.28 502.784-502.784C1014.784 234.496 789.504 9.216 512 9.216zM504.832 756.736C368.64 756.736 258.048 645.12 258.048 508.928c0-64.512 24.576-125.952 70.656-173.056 43.008-44.032 100.352-70.656 162.816-73.728L491.52 225.28l83.968 57.344-83.968 57.344 0-36.864c-107.52 7.168-192.512 97.28-192.512 205.824 0 113.664 92.16 206.848 206.848 206.848 113.664 0 206.848-92.16 206.848-206.848 0-53.248-20.48-103.424-56.32-142.336l-3.072-3.072 29.696-27.648 3.072 3.072c44.032 46.08 67.584 106.496 67.584 169.984C751.616 645.12 641.024 756.736 504.832 756.736z" p-id="994" fill="#1296db" data-spm-anchor-id="a313x.7781069.0.i0."></path></svg>
+		</div>
+		<div class='button sacle1' info='放大' onclick='scale1()'>
+			<svg t="1513157640705" class="icon" style="vertical-align: middle;" viewBox="0 0 1024 1024" p-id="2373"><path d="M512 0C230.4 0 0 230.4 0 512c0 281.6 230.4 512 512 512 281.6 0 512-230.4 512-512C1024 230.4 793.6 0 512 0zM716.8 563.2l-153.6 0 0 153.6c0 30.72-20.48 51.2-51.2 51.2s-51.2-20.48-51.2-51.2l0-153.6L307.2 563.2c-30.72 0-51.2-20.48-51.2-51.2 0-30.72 20.48-51.2 51.2-51.2l153.6 0L460.8 307.2c0-30.72 20.48-51.2 51.2-51.2s51.2 20.48 51.2 51.2l0 153.6 153.6 0c30.72 0 51.2 20.48 51.2 51.2C768 542.72 747.52 563.2 716.8 563.2z" p-id="5758" data-spm-anchor-id="a313x.7781069.0.i9."></path></svg>
+		</div>
+		<div class='button sacle0' info='放小' onclick='scale0()'>
+			<svg t="1513157640705" class="icon" style="vertical-align: middle;" viewBox="0 0 1024 1024" p-id="2373"><path d="M509.02528 57.11872c-251.07456 0-455.33184 204.288-455.33184 455.32672 0 251.07456 204.288 455.32672 455.33184 455.32672s455.32672-204.28288 455.32672-455.32672c0.03072-251.03872-204.25728-455.32672-455.32672-455.32672z m171.74528 486.88128H337.28c-13.24544 0-24.00256-18.74944-24.00256-32 0-13.24544 10.752-32 24.00256-32h343.49056c13.24544 0 24.00256 18.75456 24.00256 32-0.00512 13.25056-10.75712 32-24.00256 32z" p-id="5081" data-spm-anchor-id="a313x.7781069.0.i7."></path></svg>
+		</div>
+		<div class='button up' onclick='img_up()'>
+			<svg t="1513157640705" class="icon" style="vertical-align: middle;" viewBox="0 0 1024 1024" p-id="2373"><path d="M197.8 369.4l3.6 4.2 272 313c9.2 10.6 23 17.2 38.4 17.2 15.4 0 29.2-6.8 38.4-17.2L822 374.2l4.6-5.2c3.4-5 5.4-11 5.4-17.4 0-17.4-14.8-31.6-33.2-31.6l0 0L225.2 320l0 0c-18.4 0-33.2 14.2-33.2 31.6C192 358.2 194.2 364.4 197.8 369.4z" p-id="2374" data-spm-anchor-id="a313x.7781069.0.i0."></path></svg>
+		</div>
+		<div class='button down' onclick='img_down()'>
+			<svg t="1513157640705" class="icon" style="vertical-align: middle;" viewBox="0 0 1024 1024" p-id="2373"><path d="M197.8 369.4l3.6 4.2 272 313c9.2 10.6 23 17.2 38.4 17.2 15.4 0 29.2-6.8 38.4-17.2L822 374.2l4.6-5.2c3.4-5 5.4-11 5.4-17.4 0-17.4-14.8-31.6-33.2-31.6l0 0L225.2 320l0 0c-18.4 0-33.2 14.2-33.2 31.6C192 358.2 194.2 364.4 197.8 369.4z" p-id="2374" data-spm-anchor-id="a313x.7781069.0.i0."></path></svg>
+		</div>
+		<div class='button left' onclick='img_left()'>
+			<svg t="1513157640705" class="icon" style="vertical-align: middle;" viewBox="0 0 1024 1024" p-id="2373"><path d="M197.8 369.4l3.6 4.2 272 313c9.2 10.6 23 17.2 38.4 17.2 15.4 0 29.2-6.8 38.4-17.2L822 374.2l4.6-5.2c3.4-5 5.4-11 5.4-17.4 0-17.4-14.8-31.6-33.2-31.6l0 0L225.2 320l0 0c-18.4 0-33.2 14.2-33.2 31.6C192 358.2 194.2 364.4 197.8 369.4z" p-id="2374" data-spm-anchor-id="a313x.7781069.0.i0."></path></svg>
+		</div>
+		<div class='button right' onclick='img_right()'>
+			<svg t="1513157640705" class="icon" style="vertical-align: middle;" viewBox="0 0 1024 1024" p-id="2373"><path d="M197.8 369.4l3.6 4.2 272 313c9.2 10.6 23 17.2 38.4 17.2 15.4 0 29.2-6.8 38.4-17.2L822 374.2l4.6-5.2c3.4-5 5.4-11 5.4-17.4 0-17.4-14.8-31.6-33.2-31.6l0 0L225.2 320l0 0c-18.4 0-33.2 14.2-33.2 31.6C192 358.2 194.2 364.4 197.8 369.4z" p-id="2374" data-spm-anchor-id="a313x.7781069.0.i0."></path></svg>
+		</div>
+	</div>
+</body>
+<script src="./main.js"></script>
+
+</html>
