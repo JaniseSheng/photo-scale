@@ -3,11 +3,14 @@
 
 <head>
 	<meta charset="UTF-8">
+	<meta name="x5-orientation" content="portrait">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=50.0">
 	<title>adidas neo X 易烊千玺 海报</title>
-	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<!-- <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> -->
 	<script src="./jquery.min.js"></script>
 	<script src="./device.js"></script>
+	<script src="./wScratchPad.min.js"></script>
+	<link rel="stylesheet" href="./animate.min.css">
 	<script>
 		var _hmt = _hmt || [];
 		(function() {
@@ -29,6 +32,7 @@
 		height: 100%;
 		position: relative;
 		overflow: hidden;
+		display: table;
 	}
 
 	#scaleimg {
@@ -115,18 +119,111 @@
 
 	.img-tips {
 		width: 50px;
-		position: fixed;
+		position: absolute;
 		right: 10px;
 		bottom: 10px;
 		display: none;
 	}
+
+	canvas {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		top: 0;
+	}
+
+	.easer_tips_box {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 2;
+	}
+
+	body:click .easer_tips_box {
+		display: none;
+	}
+	.top_img_box {
+		height: 50%;
+		position: relative;
+	}
+	.top_img_box img{
+		width: 160px;
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		margin: auto;
+	}
+	.bottom_img_box {
+		height: 50%;
+    position: relative;
+    width: 120px;
+    margin: auto;
+    padding-top: 24px;
+	}
+	.bottom_img_box img{
+		width: 32px;
+		float: left;
+	}
+
+	.animatedtips {
+    animation-duration: 2s;
+    animation-fill-mode: both;
+		animation-iteration-count: infinite;
+		animation-timing-function: ease;
+}
+@keyframes infiniteTips {
+    0% {
+    		opacity: 0;
+        transform: translateX(0);
+    }
+    30% {
+    		opacity: 1;
+    }
+
+    33% {
+        transform: translate3d(120px,0,0);
+    }
+
+		66% {
+        transform: translate3d(0px,100px,0);
+    }
+
+    70% {
+    		opacity: 1;
+    }
+    100% {
+    		opacity: 0;
+        transform: translate3d(120px, 100px,0);
+    }
+}
+
+.infiniteTips {
+    animation-name: infiniteTips;
+    transform-origin: center bottom
+}
+
 </style>
 
 <body style="background-color: black; text-align:center;overflow-x: scroll;">
-	<span style="line-height: 100vh">
-		<img id='scaleimg' src="./img.jpg" alt="" style="left: 0%; top: 0%;transform: scale(1)">
-	</span>
-	<img class='img-tips' src="./tips.gif" alt="">
+	<div style="display:table-cell; vertical-align: middle;">
+		<div id='imgbox' style="position:relative; overflow: hidden">
+			<img id='scaleimg' src="./img.jpg" alt="" style="left: 0%; top: 0%;transform: scale(1);">
+			<!-- <img id='scaleimgCanvas' src="./easer.png" alt="" style="position: absolute;top: 0;right: 0;bottom: 0;left: 0;height: 100%;width: 100%;"> -->
+			<div class='easer_tips_box' id='easer_tips_box'>
+				<div class='top_img_box'>
+					<img src="./tip_earse.png" alt="">
+				</div>
+				<div class='bottom_img_box'>
+					<img class='infiniteTips animatedtips' src="./tip_hander.png" alt="">
+				</div>
+			</div>
+			<img class='img-tips' src="./tips.gif" alt="">
+		</div>
+	</div>
 	<div class='desktop_control'>
 		<div class='button return' info='复位' onclick='img_return()'>
 			<svg t="1513157640705" style="vertical-align: middle;" viewBox="0 0 1024 1024" p-id="2373"><path d="M512 9.216C234.496 9.216 9.216 234.496 9.216 512c0 277.504 225.28 502.784 502.784 502.784 277.504 0 502.784-225.28 502.784-502.784C1014.784 234.496 789.504 9.216 512 9.216zM504.832 756.736C368.64 756.736 258.048 645.12 258.048 508.928c0-64.512 24.576-125.952 70.656-173.056 43.008-44.032 100.352-70.656 162.816-73.728L491.52 225.28l83.968 57.344-83.968 57.344 0-36.864c-107.52 7.168-192.512 97.28-192.512 205.824 0 113.664 92.16 206.848 206.848 206.848 113.664 0 206.848-92.16 206.848-206.848 0-53.248-20.48-103.424-56.32-142.336l-3.072-3.072 29.696-27.648 3.072 3.072c44.032 46.08 67.584 106.496 67.584 169.984C751.616 645.12 641.024 756.736 504.832 756.736z" p-id="994" fill="#1296db" data-spm-anchor-id="a313x.7781069.0.i0."></path></svg>

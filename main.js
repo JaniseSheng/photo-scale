@@ -53,16 +53,62 @@ $(document).ready(function() {
     window.location.href = 'http://neo1128.toma.ltd/'
     return
   }
+  //分享
+  handleWechatShare()
+
+  //如果有人触摸就去掉模糊提示 - pc
+  $('.easer_tips_box').click(function(){
+    $('.easer_tips_box').remove()
+  })
+  //如果有人触摸就去掉模糊提示 - mobile
+  easer_box_touch()
+  img_touch()
+
+  $('#imgbox').wScratchPad({
+    size: 30, // The size of the brush/scratch.
+    bg: '#cacaca', // Background (image path or hex color).
+    fg: './easer_blur.png', // Foreground (image path or hex color).
+    realtime: true, // Calculates percentage in realitime.
+    cursor: 'pointer',
+    scratchDown: function(e, percent){
+      console.log('start');
+      console.log(percent);
+    },
+    scratchMove: function(e, percent){
+      console.log('move');
+      console.log(percent);
+      if (percent < 20) {
+        return
+      }
+      eraserCompleted()
+     },
+  });
+});
+
+function eraserCompleted() {
+  //清楚canvas 遮罩
+  aminateRemoveCanvas()
   var isdesktop = device.default.desktop()
   if (isdesktop) {
     $('.desktop_control').css('display', 'block')
+    $('.desktop_control').addClass('animated slideInUp')
   } else {
     $('.img-tips').css('display', 'block')
+    $('.img-tips').addClass('animated bounceIn')
+
   }
-  handleWechatShare()
-});
+}
+//清楚canvas 遮罩
+function aminateRemoveCanvas() {
+  var canvas = document.querySelector('canvas')
+  $(canvas).addClass('animated fadeOut')
+  setTimeout(function(){
+      $('#imgbox').wScratchPad('clear');
+      $(canvas).remove();
+  }, 1000)
+}
 
-
+//微信分享
 function handleWechatShare() {
   var url = window.location.href.split('#')[0]; //'http://neo1128.toma.ltd/' //window.location.href.split('#')[0];
   var ajaxurl = 'http://neo1128.toma.ltd/getsignpackage.php?url=' + url
@@ -92,4 +138,18 @@ function handleWechatShare() {
       wx.onMenuShareQQ(share_config);
     })
   });
+}
+// ----------------------------- 手机端 ------------------------
+function easer_box_touch (){
+  var dom = document.getElementById('easer_tips_box')
+  dom.addEventListener('touchstart', function(){
+    $('.easer_tips_box').remove()
+  }, false)
+}
+
+function img_touch (){
+  var dom = document.getElementById('scaleimg')
+  dom.addEventListener('touchstart', function(){
+    $('.img-tips').remove()
+  }, false)
 }
