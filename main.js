@@ -1,6 +1,8 @@
 var scalenum = 1
 var scaleTop = 0
 var scaleLeft = 0
+var isCanDelTips = false
+var isdesktop = device.default.desktop()
 function scale1() {
   scalenum++
   if (scalenum > 6) {
@@ -56,39 +58,50 @@ $(document).ready(function() {
   //分享
   handleWechatShare()
 
-  //如果有人触摸就去掉模糊提示 - pc
-  $('.easer_tips_box').click(function(){
-    $('.easer_tips_box').remove()
-  })
-  //如果有人触摸就去掉模糊提示 - mobile
-  easer_box_touch()
-  img_touch()
+//body 阻止默认行为
+  body_pd();
 
-  $('#imgbox').wScratchPad({
-    size: 30, // The size of the brush/scratch.
-    bg: '#cacaca', // Background (image path or hex color).
-    fg: './easer_blur.png', // Foreground (image path or hex color).
-    realtime: true, // Calculates percentage in realitime.
-    cursor: 'pointer',
-    scratchDown: function(e, percent){
-      console.log('start');
-      console.log(percent);
-    },
-    scratchMove: function(e, percent){
-      console.log('move');
-      console.log(percent);
-      if (percent < 20) {
-        return
-      }
-      eraserCompleted()
-     },
-  });
+  $('#imgbox').imagesLoaded(function(){
+    $('#scaleimg').css('opacity', 1)
+
+    //如果有人触摸就去掉模糊提示 - pc
+    $('#body').mousedown(function(){
+      $('.easer_tips_box').remove()
+    })
+    //如果有人触摸就去掉模糊提示 - mobile
+    easer_box_touch()
+img_touch()
+    $('#imgbox').wScratchPad({
+      size: isdesktop ? 70 : 30, // The size of the brush/scratch.
+      bg: 'black', // Background (image path or hex color).
+      fg: './easer_blur.jpg', // Foreground (image path or hex color).
+      realtime: true, // Calculates percentage in realitime.
+      cursor: 'pointer',
+      scratchDown: function(e, percent){
+        document.getElementsByTagName("meta")[2]["content"] = "width=device-width, initial-scale=1.0,maximum-scale=50.0";
+        setTimeout(function(){
+          eraserCompleted()
+        },5000)
+      },
+      scratchMove: function(e, percent){
+        if (percent < 50) {
+          return
+        }
+        eraserCompleted()
+       },
+    });
+    $('#easer_tips_box').css('opacity', 1)
+  })
 });
 
 function eraserCompleted() {
+
+    isCanDelTips = true
+//body 恢复默认行为
+  return_body_pd()
+
   //清楚canvas 遮罩
   aminateRemoveCanvas()
-  var isdesktop = device.default.desktop()
   if (isdesktop) {
     $('.desktop_control').css('display', 'block')
     $('.desktop_control').addClass('animated slideInUp')
@@ -141,15 +154,34 @@ function handleWechatShare() {
 }
 // ----------------------------- 手机端 ------------------------
 function easer_box_touch (){
-  var dom = document.getElementById('easer_tips_box')
+  var dom = document.getElementById('body')
   dom.addEventListener('touchstart', function(){
     $('.easer_tips_box').remove()
   }, false)
 }
 
 function img_touch (){
-  var dom = document.getElementById('scaleimg')
+  var dom = document.getElementById('body')
   dom.addEventListener('touchstart', function(){
-    $('.img-tips').remove()
+    if (isCanDelTips) {
+      $('.img-tips').remove()
+    }
   }, false)
+}
+
+//body 阻止默认行为
+function body_pd (){
+  var dom = document.getElementById('body')
+  dom.addEventListener('touchstart', prefn, false)
+}
+
+//body 恢复默认行为
+function return_body_pd (){
+  var dom = document.getElementById('body')
+  dom.removeEventListener('touchstart', prefn, false)
+}
+
+//阻止默认行为
+function prefn(ev) {
+	ev.preventDefault();
 }
